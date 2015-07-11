@@ -19,17 +19,8 @@
     <tt id="pings"></tt>
     <h1>Gestures</h1>
     <canvas id="gestures" width="400" height="400"></canvas>
-    <script>
-      var canvas = document.getElementById("gestures");
-      var ctx = canvas.getContext("2d");
-      var host = location.origin.replace(/^http/, 'ws')
-      var ws = new WebSocket(host);
-      ws.onmessage = function (event) {
-        var output = event.data;
-        var gesture = JSON.parse(event.data);
-        document.querySelector('#pings').innerHTML = output;
-        ctx.fillRect(2 * (100 + gesture.point.x), 2 * (100 + gesture.point.y), 2, 2);
-      };
-    </script>
+    <h1>Score</h1>
+    <tt id="scores">0</tt>
+    <script src="static/index.js"></script>
   </body>
 </html>

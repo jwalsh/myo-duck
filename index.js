@@ -44,7 +44,7 @@ console.log('websocket server created');
 
 wss.on('connection', function(ws) {
   var id = setInterval(function() {
-      ws.send(JSON.stringify(
+    ws.send(JSON.stringify(
           {
               'date': new Date(),
               'point': {
@@ -52,13 +52,13 @@ wss.on('connection', function(ws) {
                   'y': Math.random() * 200 - 100
               }
           }));
-  }, 1000);
+  }, 100);
 
-    // Pass Myo gesture activity over to the web UI
-    myMyo.on('gyroscope', function(data) {
+  // Pass Myo gesture activity over to the web UI
+  myMyo.on('gyroscope', function(data) {
         console.log(new Date(), 'gyroscope', data);
         ws.send(JSON.stringify(new Date()), data);
-    });
+  });
 
   console.log('websocket connection open');
 
