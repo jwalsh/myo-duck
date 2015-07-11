@@ -20,21 +20,16 @@ myoEvents = ['fist', 'thumb_to_pinky', 'connected', 'double_tap',
 
 myoEvents.map(function(e, i, c) {
   myMyo.on(e, function(evt) {
-      console.log(new Date(), e, evt);
+    console.log(new Date(), e, evt);
       myMyo.vibrate('short').vibrate('short');
   });
 });
 
 
-myMyo.on('fist', function(val){
-    console.log('zeroOrientation [fist]');
-    myMyo.zeroOrientation();
+myMyo.on('fist', function(val) {
+  console.log('zeroOrientation [fist]');
+  myMyo.zeroOrientation();
 });
-
-myMyo.on('bluetooth_strength', function(val){
-    console.log('Such strength', val);
-});
-myMyo.requestBluetoothStrength();
 
 var wss = new WebSocketServer({server: server});
 console.log('websocket server created');
@@ -47,10 +42,9 @@ wss.on('connection', function(ws) {
   myMyo.on('gyroscope', function(data) {
         // console.log(new Date(), 'gyroscope', data);
 
-		ws.send(JSON.stringify(
-          {
-              'date': new Date(),
-              'point': data
+    ws.send(JSON.stringify({
+      'date': new Date(),
+      'point': data
           }));
   });
 
