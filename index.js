@@ -1,5 +1,5 @@
 var Myo = require('myo');
-var midi = require('midi');
+// var midi = require('midi');
 var myMyo = Myo.create();
 var WebSocketServer = require('ws').Server;
 var http = require('http');
@@ -25,19 +25,19 @@ myoEvents.map(function(e, i, c) {
 });
 
 
-// Set up a new output for displaying sound
-var output = new midi.output();
-// This needs to be configured either for Bluetooth or network
-var portsCount = output.getPortCount();
+// // Set up a new output for displaying sound
+// var output = new midi.output();
+// // This needs to be configured either for Bluetooth or network
+// var portsCount = output.getPortCount();
 
-if (portsCount > 0) {
-  output.getPortName(0);
-  output.openPort(0);
-  myMyo.on('gyroscope', function(data) {
-    output.sendMessage([(data.x % 127), (data.y % 127), 1]);
-  });
-}
-// output.closePort();
+// if (portsCount > 0) {
+//   output.getPortName(0);
+//   output.openPort(0);
+//   myMyo.on('gyroscope', function(data) {
+//     output.sendMessage([(data.x % 127), (data.y % 127), 1]);
+//   });
+// }
+// // output.closePort();
 
 var wss = new WebSocketServer({server: server});
 console.log('websocket server created');

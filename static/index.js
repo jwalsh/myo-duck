@@ -34,6 +34,6 @@ ws.onmessage = function(event) {
       x,
       y);
   score += inWater ? 1 : -1;
-  console.log(score, inWater);
+  // console.log(score, inWater);
   scores.innerHTML = 'inWater: ' + inWater + ' : ' + score;
 };
