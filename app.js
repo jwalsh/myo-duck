@@ -2,7 +2,7 @@ var Myo = require('myo');
 
 var myMyo = Myo.create();
 
-console.log('app.js');
+console.log('app.js running');
 
 // var events = ['fist', 'gyroscope'];
 
