@@ -30,9 +30,9 @@ ws.onmessage = function(event) {
   logo.style.position = 'absolute';
   logo.style.right = 100 + x / 10;
   logo.style.top = 100 + y / 10;
-    if (gesture.point.x > 100 || gesture.point.y > 100) {
-        logoWidth += 20;
-        logoHeight += 20;
+  if (gesture.point.z > 150) {
+        logoWidth += 5;
+        logoHeight += 5;
         logo.style.width = logoWidth;
         logo.style.height = logoHeight;
     }
