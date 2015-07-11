@@ -13,6 +13,12 @@ duck.src = 'static/duck-icon.png';
 var kiwi = new Image();
 kiwi.src = 'static/kiwi-icon.png';
 
+var pings = document.querySelector('#pings');
+
+var logo = document.getElementById('logo');
+var logoWidth = 80;
+var logoHeight = 80;
+
 var host = location.origin.replace(/^http/, 'ws');
 var ws = new WebSocket(host);
 ws.onmessage = function(event) {
@@ -20,7 +26,18 @@ ws.onmessage = function(event) {
   var gesture = JSON.parse(event.data);
   var x = 2 * (100 + gesture.point.x);
   var y = 2 * (100 + gesture.point.y);
-  document.querySelector('#pings').innerHTML = output;
+
+  logo.style.position = 'absolute';
+  logo.style.right = 100 + x / 10;
+  logo.style.top = 100 + y / 10;
+    if (gesture.point.x > 100 || gesture.point.y > 100) {
+        logoWidth += 20;
+        logoHeight += 20;
+        logo.style.width = logoWidth;
+        logo.style.height = logoHeight;
+    }
+
+  pings.innerHTML = output;
   var inWater = (function(point) {
     // Water boundry conditions for the channel
     return point.y > -.1 * point.x + 180 &&
