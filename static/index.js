@@ -10,6 +10,8 @@ var score = 0;
 
 var duck = new Image();
 duck.src = 'static/duck-icon.png';
+var kiwi = new Image();
+kiwi.src = 'static/kiwi-icon.png';
 
 var host = location.origin.replace(/^http/, 'ws');
 var ws = new WebSocket(host);
@@ -24,13 +26,13 @@ ws.onmessage = function(event) {
     return point.y > -.1 * point.x + 180 &&
         point.y < 440 + -.6 * point.x;
   }({x: x, y: y}));
+  var bird = kiwi;
   if (inWater) {
-    ctx.drawImage(duck,
-                  x,
-                  y);
-  } else {
-    ctx.fillRect(x, y, 20, 20);
+    bird = duck;
   }
+  ctx.drawImage(bird,
+      x,
+      y);
   score += inWater ? 1 : -1;
   console.log(score, inWater);
   scores.innerHTML = 'inWater: ' + inWater + ' : ' + score;
