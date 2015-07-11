@@ -28,11 +28,11 @@ ws.onmessage = function(event) {
   var y = 2 * (100 + gesture.point.y);
 
   logo.style.position = 'absolute';
-  logo.style.right = 100 + x / 10;
-  logo.style.top = 100 + y / 10;
-  if (gesture.point.z > 150) {
-        logoWidth += 5;
-        logoHeight += 5;
+  logo.style.right = 100 + gesture.point.x / 50;
+  logo.style.top = 100 + gesture.point.y / 50;
+    if (Math.abs(gesture.point.z) > 150) {
+        logoWidth += gesture.point.z % 20;
+        logoHeight += gesture.point.z % 20;
         logo.style.width = logoWidth;
         logo.style.height = logoHeight;
     }
