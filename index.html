@@ -5,30 +5,31 @@
         font-family: "Helvetica Neue", helvetica, arial;
         padding: 15px;
       }
-
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
+      #pings {
+        float: right;
+        color: #369;
       }
-
-      ul li {
-        line-height: 1.4;
+      canvas {
+        border: 1px, solid, #aaa;
       }
     </style>
-
-    <script>
-      var host = location.origin.replace(/^http/, 'ws')
-      var ws = new WebSocket(host);
-      ws.onmessage = function (event) {
-        var li = document.createElement('li');
-        li.innerHTML = JSON.parse(event.data);
-        document.querySelector('#pings').appendChild(li);
-      };
-    </script>
   </head>
   <body>
     <h1>Pings</h1>
-    <ul id='pings'></ul>
+    <tt id="pings"></tt>
+    <h1>Gestures</h1>
+    <canvas id="gestures" width="400" height="400"></canvas>
+    <script>
+      var canvas = document.getElementById("gestures");
+      var ctx = canvas.getContext("2d");
+      var host = location.origin.replace(/^http/, 'ws')
+      var ws = new WebSocket(host);
+      ws.onmessage = function (event) {
+        var output = event.data;
+        var gesture = JSON.parse(event.data);
+        document.querySelector('#pings').innerHTML = output;
+        ctx.fillRect(2 * (100 + gesture.point.x), 2 * (100 + gesture.point.y), 2, 2);
+      };
+    </script>
   </body>
 </html>
