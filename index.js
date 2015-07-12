@@ -1,11 +1,16 @@
-var Myo = require('myo');
+// var Myo = require('myo');
 // var midi = require('midi');
-var myMyo = Myo.create();
+var myMyo = { // Myo.create();
+    on: function() {},
+    vibrate: function() {},
+    zeroOrientation: function() {}
+};
 var WebSocketServer = require('ws').Server;
 var http = require('http');
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 5000;
+var mockMyo = require('./myo-gyroscope-mock');
 
 app.use(express.static(__dirname + '/'));
 
@@ -31,12 +36,24 @@ myMyo.on('fist', function(val) {
   myMyo.zeroOrientation();
 });
 
+
+console.log(mockMyo.mockPosition(0));
+
 var wss = new WebSocketServer({server: server});
 console.log('websocket server created');
 
 wss.on('connection', function(ws) {
 
   console.log('websocket connection open');
+
+    // Test run for two seconds
+    var mockGyroscope = setInterval(
+        function() {
+            ws.send(JSON.stringify({
+                'date': new Date(),
+                'point': mockMyo.mockPosition(new Date())
+            }));
+        }, 30);
 
   // Pass Myo gesture activity over to the web UI
   myMyo.on('gyroscope', function(data) {
