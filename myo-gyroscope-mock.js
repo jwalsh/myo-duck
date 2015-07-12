@@ -10,7 +10,7 @@ var mock = {
     origin:  {
         x: 0,
         y: 0,
-        z: 65
+        z: 5
     }, // meters
     rotationTime: 253 // milliseconds
 };
@@ -18,12 +18,13 @@ var mock = {
 var position = function(t, r, origin, rotationTime) {
     // console.log('position()', t, r, origin, rotationTime);;
     var jitter = 5 * Math.random();
-    var scale = (.3 * t / rotationTime);
+    var scale = (.6 * t / rotationTime);
     var angle =  (t / rotationTime) % (2 * Math.PI);
+    var zangle =  (t / rotationTime) % (2 * Math.PI);
     var z = parseFloat((origin.z + jitter +
-                        r * Math.cos(scale + angle)).toPrecision(6));
+                        r * Math.sin(scale + angle)).toPrecision(6));
     // Scaled height of the cross-section
-    var h = r * Math.sqrt((1.1 - Math.cos(scale + angle)) / 2);
+    var h = r * Math.sin(scale + angle);
     var x = parseFloat((origin.x + jitter + h * Math.cos(angle)).toPrecision(6));
     var y = parseFloat((origin.y + jitter + h * Math.sin(angle)).toPrecision(6));
     console.log(t, angle, z, h, x, y);
