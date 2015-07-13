@@ -12,7 +12,7 @@ var mock = {
         y: 0,
         z: 5
     }, // meters
-    rotationTime: 253 // milliseconds
+    rotationTime: 453 // milliseconds
 };
 
 var position = function(t, r, origin, rotationTime) {

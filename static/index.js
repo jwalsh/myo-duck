@@ -1,4 +1,4 @@
-var canvas = document.getElementById('gestures');
+var canvas = document.getElementById('gyroscope');
 var ctx = canvas.getContext('2d');
 var background = new Image();
 background.src = 'static/channel.png';
@@ -23,16 +23,16 @@ var host = location.origin.replace(/^http/, 'ws');
 var ws = new WebSocket(host);
 ws.onmessage = function(event) {
   var output = event.data;
-  var gesture = JSON.parse(event.data);
-  var x = 2 * (100 + gesture.point.x);
-  var y = 2 * (100 + gesture.point.y);
+  var gyroscope = JSON.parse(event.data);
+  var x = 2 * (100 + gyroscope.point.x);
+  var y = 2 * (100 + gyroscope.point.y);
 
   logo.style.position = 'absolute';
-  logo.style.right = 100 + gesture.point.x / 50;
-  logo.style.top = 100 + gesture.point.y / 50;
-    if (Math.abs(gesture.point.z) > 1) {
-        logoWidth += gesture.point.z % 20;
-        logoHeight += gesture.point.z % 20;
+  logo.style.right = 100 + gyroscope.point.x / 50;
+  logo.style.top = 100 + gyroscope.point.y / 50;
+    if (Math.abs(gyroscope.point.z) > 1) {
+        logoWidth += gyroscope.point.z % 20;
+        logoHeight += gyroscope.point.z % 20;
         logo.style.width = logoWidth;
         logo.style.height = logoHeight;
     }

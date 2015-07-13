@@ -10,7 +10,9 @@
     "myo": "^1.5.0",
     "ws": "^0.7.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "pre-git": "^0.6.2"
+  },
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
